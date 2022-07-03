@@ -16,7 +16,7 @@ from unittest import result
 
 def writeToFile(url,result): # 将检测结果写入文件并记录检测时间
 	now=datetime.datetime.now()
-	ft=open("result.txt",'a')
+	ft=open("urlDetectionResult.txt",'a')
 	ft.write('\n')
 	ft.write(result)
 	ft.write('\n')
@@ -34,7 +34,7 @@ async def judgUrl(comm): # 判断地址是否有流
 	while time_end-time_start<30:
 		next_line = p.stdout.readline()
 		return_line = next_line.decode("utf-8", "ignore")
-		if return_line == '' and p.poll() != None:
+		if return_line == '' :#and p.poll() == None:
 			print("Failed to push streaming")
 			haveStreaming=False
 			break
