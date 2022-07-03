@@ -1,0 +1,8 @@
+
+Failed to pull a video stream from the url :
+rtsp://admin:workhard0106@192.168.10.4
+检测时间：2022-07-04 00:33:36.043503
+
+Successfully pulled the video stream from the url:
+rtsp://wowzaec2demo.streamlock.net/vod/mp4
+检测时间：2022-07-04 00:34:06.465366

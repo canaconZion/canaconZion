@@ -14,16 +14,32 @@ async def test(comm):
 
     time_start=time.time()
     time_end=time.time()
+    haveStreaming=True
+    # next_line = p.stdout.readline()
+    # return_line = next_line.decode("utf-8", "ignore")
     while time_end-time_start<30:
         next_line = p.stdout.readline()
         return_line = next_line.decode("utf-8", "ignore")
         if return_line == '' and p.poll() != None:
+            print("Failed to push streaming")
+            haveStreaming=False
             break
         print(return_line)
-        ft=open("errorCatch.txt",'a')
+        ft=open("errorCatch1.txt",'a')
         ft.write(return_line)
         ft.write('\n')
         time_end=time.time()
+    #     print(return_line)
+    #     ft=open("errorCatch1.txt",'a')
+    #     ft.write(return_line)
+    #     ft.write('\n')
+    #     time_end=time.time()
+    if haveStreaming==True:
+        print("Successfully pushing streaming from :")
+        print(comm)
+    else:
+        print("Failed to push video streaming from :")
+        print(comm)
     p.kill()
 		
 comm='gst-launch-1.0 rtspsrc location=rtsp://wowzaec2demo.streamlock.net/vod/mp4 ! fakesink dump=true'
