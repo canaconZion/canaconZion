@@ -14,6 +14,11 @@ import time
 import datetime
 from unittest import result
 
+def getUrl(ip,carrierId,aircraftId):
+	urls[4]=[
+
+	]
+
 def writeToFile(url,result): # 将检测结果写入文件并记录检测时间
 	now=datetime.datetime.now()
 	ft=open("urlDetectionResult.txt",'a')
@@ -62,18 +67,23 @@ def judgeProtocol(str): # 判断拉流协议
 		command='gst-launch-1.0 rtmpsrc location= '+str+' ! fakesink dump=true'
 	return command
 
+droneServer=json.loads(os.popen("curl localhost:9001/drone -s").readline())
+carrierId=droneServer['carrierId']
+aircraftId=droneServer['drones'][0]['aircraftId']
 path='./automated-testing-config.json'
-f = open(path,'r',encoding='utf-8')
-m = json.load(f) 
-urls=m['srcurl']
-for url in urls:
-	#print(str)
-	comm=judgeProtocol(url)
-	print(comm)
-	loop = asyncio.get_event_loop()
-	checkResult=loop.run_until_complete(judgUrl(comm))
-	checkTime=str(datetime.datetime.now())
-	if checkResult==True:
-		writeToFile(url,"Successfully pulled the video stream from the url:")
-	else:
-		writeToFile(url,"Failed to pull a video stream from the url :")
+conFile = json.load(open(path,'r',encoding='utf-8')) 
+ips=conFile['ip']
+for ip in ips:
+	urls=getUrl(ip,carrierId,aircraftId)
+#urls=m['srcurl']
+	for url in urls:
+		#print(str)
+		comm=judgeProtocol(url)
+		print(comm)
+		loop = asyncio.get_event_loop()
+		checkResult=loop.run_until_complete(judgUrl(comm))
+		checkTime=str(datetime.datetime.now())
+		if checkResult==True:
+			writeToFile(url,"Successfully pulled the video stream from the url:")
+		else:
+			writeToFile(url,"Failed to pull a video stream from the url :")
