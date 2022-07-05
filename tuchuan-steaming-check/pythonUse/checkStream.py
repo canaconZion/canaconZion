@@ -14,10 +14,13 @@ import time
 import datetime
 from unittest import result
 
-def getUrl(ip,carrierId,aircraftId):
-	urls[4]=[
-
-	]
+def getUrl(ip,carrierId,aircraftId): # 拼接推流地址
+	DRONE="rtmp://"+ip+":1935/"+carrierId+"/"+aircraftId
+	JITOU="rtmp://"+ip+":1935/"+carrierId+"/"+"JITOU"
+	JIWEI="rtmp://"+ip+":1935/"+carrierId+"/"+"JIWEI"
+	WEIGAN="rtmp://"+ip+":1935/"+carrierId+"/"+"WEIGAN"
+	urls=[DRONE,JITOU,JIWEI,WEIGAN]
+	return urls
 
 def writeToFile(url,result): # 将检测结果写入文件并记录检测时间
 	now=datetime.datetime.now()
@@ -75,11 +78,11 @@ conFile = json.load(open(path,'r',encoding='utf-8'))
 ips=conFile['ip']
 for ip in ips:
 	urls=getUrl(ip,carrierId,aircraftId)
-#urls=m['srcurl']
+	#urls=m['srcurl']
 	for url in urls:
 		#print(str)
 		comm=judgeProtocol(url)
-		print(comm)
+		#print(comm)
 		loop = asyncio.get_event_loop()
 		checkResult=loop.run_until_complete(judgUrl(comm))
 		checkTime=str(datetime.datetime.now())
