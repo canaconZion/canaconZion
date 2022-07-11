@@ -38,7 +38,10 @@ if __name__ == '__main__':
         if len(result.failures) > 0:
             exit(1)
     elif cpu_arch in ('aarch64', ):
-        ...
+        suite.addTest(test_tuchuan.TestTuchuanCase.parametrize(test_tuchuan.TestTuchuanCase, image_tag, rtmp_server, janus_server, f"http://172.17.0.1:{httpd_port}", carrier_id, aircraft_id))
+        result = runner.run(suite)
+        if len(result.failures) > 0:
+            exit(1)
     else:
         print(f'Unkonwn cpu arch: {cpu_arch}')
 

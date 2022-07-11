@@ -44,7 +44,7 @@ def run_tuchuan_container(image_tag: str, config_filepath: str, service_filepath
     elif cpu_arch in ('aarch64', ):
         run_cmd = cmd_base[:]
         run_cmd.extend([
-            '-e', '--runtime', 'nvidia',
+            '--runtime', 'nvidia',
             '-e', ' GST_PLUGIN_PATH=/usr/local/lib/aarch64-linux-gnu/gstreamer-1.0:/usr/lib/aarch64-linux-gnu/gstreamer-1.0'
         ])
     else:
