@@ -1,4 +1,4 @@
-### Hi there 👋
+### Live as if you were to die tomorrow. 
 
 <!--
 **canaconZion/canaconZion** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
