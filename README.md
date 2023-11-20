@@ -1,4 +1,5 @@
-### Live as if you were to die tomorrow. 
+### 子在川上曰：“逝者如斯夫！不舍昼夜。”
+我的博客：https://holyzion.host/
 
 
 <!--
